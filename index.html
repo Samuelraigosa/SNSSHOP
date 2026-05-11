@@ -180,12 +180,15 @@
     line-height: 1.1;
     user-select:none;
   }
-  .hero-text h1 span {
-    background: linear-gradient(90deg, #db00ff 0%, #ff6d05 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    display: inline-block;
-  }
+.hero-text h1 span {
+  background: linear-gradient(90deg, #db00ff 0%, #ff6d05 100%);
+  -webkit-background-clip: text;
+  background-clip: text; /* Propiedad estándar agregada para compatibilidad */
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+  
   .hero-text p {
     font-size: 1.1rem;
     line-height: 1.5;
