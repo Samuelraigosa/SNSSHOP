@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SNShop - Compra Diferente</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+  :root {
+    --color-dark: #0b0d29;
+    --color-pink: #db00ff;
+    --color-orange: #ff6d05;
+    --color-purple: #7d00ff;
+    --color-pink-gradient: linear-gradient(90deg, #db00ff, #ff6d05);
+    --color-bg-grad: linear-gradient(135deg, #0b0d29 0%, #2a1a57 100%);
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    background: var(--color-dark);
+    font-family: 'Poppins', sans-serif;
+    color: white;
+  }
+  a {
+    text-decoration: none;
+    color: white;
+  }
+  /* Navbar */
+  header {
+    background: var(--color-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    height: 60px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 900;
+    font-size: 1.4rem;
+    color: white;
+    user-select: none;
+  }
+  .logo-img {
+    height: 35px;
+  }
+  .logo span {
+    color: var(--color-pink);
+  }
+  nav {
+    flex-grow: 1;
+    margin-left: 40px;
+  }
+  .nav-links {
+    display: flex;
+    gap: 25px;
+    list-style: none;
+    align-items: center;
+  }
+  .nav-links li {
+    position: relative;
+  }
+  .nav-links li:hover > a,
+  .nav-links li.active > a {
+    color: var(--color-pink);
+  }
+  .nav-links a {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: white;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .nav-links .dropdown {
+    cursor: pointer;
+  }
+  /* Dropdown content */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 26px;
+    background: #1f1445;
+    min-width: 170px;
+    border-radius: 8px;
+    padding: 12px 0;
+    box-shadow: 0 0 12px rgb(219 0 255 / 0.4);
+  }
+  .dropdown-content a {
+    display: block;
+    padding: 10px 20px;
+    font-weight: 400;
+    font-size: 0.9rem;
+    color: white;
+  }
+  .dropdown-content a:hover {
+    background: var(--color-pink);
+    color: black;
+  }
+  .nav-links li:hover .dropdown-content {
+    display: block;
+  }
+  /* Search bar */
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background: #2a1a57;
+    border-radius: 30px;
+    padding: 6px 12px;
+    width: 250px;
+  }
+  .search-bar input {
+    border: none;
+    background: transparent;
+    color: white;
+    padding: 6px 10px;
+    font-size: 0.9rem;
+    outline: none;
+    flex-grow: 1;
+  }
+  .search-bar button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: white;
+    display: flex;
+    align-items: center;
+  }
+  .search-bar svg {
+    fill: white;
+    width: 18px;
+    height: 18px;
+  }
+  /* Icons */
+  .nav-icons {
+    display: flex;
+    gap: 15px;
+    margin-left: 30px;
+    align-items: center;
+  }
+  .nav-icons svg {
+    fill: white;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    transition: fill 0.3s;
+  }
+  .nav-icons svg:hover {
+    fill: var(--color-pink);
+  }
+  /* Hero */
+  .hero {
+    display: flex;
+    max-width: 1200px;
+    margin: 40px auto 100px auto;
+    gap: 60px;
+    align-items: center;
+    padding: 0 20px;
+  }
+  .hero-text {
+    flex: 1;
+  }
+  .hero-text .label {
+    font-weight: 600;
+    color: #bdc4dbd7;
+    letter-spacing: 3px;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+  }
+  .hero-text h1 {
+    font-size: 3.5rem;
+    margin: 0 0 15px 0;
+    font-weight: 900;
+    line-height: 1.1;
+    user-select:none;
+  }
+  .hero-text h1 span {
+    background: linear-gradient(90deg, #db00ff 0%, #ff6d05 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+  }
+  .hero-text p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: #cbcddedd;
+    max-width: 460px;
+    margin-bottom: 30px;
+  }
+  .btn-primary {
+    background: linear-gradient(90deg, #ff6d05, #db00ff);
+    padding: 15px 45px;
+    border-radius: 40px;
+    font-weight: 900;
+    font-size: 1.1rem;
+    border: none;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    box-shadow: 0 0 18px rgb(219 0 255 / 0.8);
+  }
+  .btn-primary:hover {
+    filter: brightness(1.25);
+    transform: translateY(-3px);
+  }
+  /* Icons under hero */
+  .benefits {
+    margin-top: 50px;
+    display: flex;
+    gap: 50px;
+    max-width: 600px;
+  }
+  .benefit {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    user-select:none;
+  }
+  .benefit svg {
+    width: 22px;
+    height: 22px;
+    fill: var(--color-pink);
+  }
+  .benefit span {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #cbcde0cc;
+  }
+  /* Hero image */
+  .hero-image {
+    flex: 1;
+    user-select:none;
+  }
+  .hero-image img {
+    width: 100%;
+    max-width: 470px;
+  }
+  /* Categories */
+  .categories {
+    max-width: 1200px;
+    margin: 0 auto 60px auto;
+    padding: 0 20px;
+    display: flex;
+    gap: 25px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    border-radius: 25px;
+    background: #130d3e99;
+    box-shadow: 0 0 20px rgb(219 0 255 / 0.4);
+    user-select:none;
+  }
+  .category {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 22px;
+    white-space: nowrap;
+    border-radius: 25px;
+    color: white;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  .category svg {
+    width: 21px;
+    height: 21px;
+    flex-shrink: 0;
+  }
+  .category.tech { background: #4c1bd1; }
+  .category.fashion { background: #ff4b75; }
+  .category.sports { background: #ff9100; }
+  .category.home { background: #ffde00; color: #000; }
+  .category.beauty { background: #ec008c; }
+  .category.toys { background: #37bc1a; }
+  .category.accessories {background:#1877f2;}
+  .category.more { 
+    background: #6e33ff; 
+    border-radius: 30px;
+  }
+  .category:hover {
+    filter: brightness(1.3);
+  }
+  /* Benefits section */
+  .benefits-row {
+    max-width: 1200px;
+    margin: 0 auto 80px auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    user-select:none;
+  }
+  .benefit-item {
+    background: #130d3ecc;
+    padding: 25px 22px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+    box-shadow: 0 0 18px rgb(219 0 255 / 0.5);
+  }
+  .benefit-icon {
+    font-size: 28px;
+    color: var(--color-pink);
+    flex-shrink: 0;
+  }
+  .benefit-text {
+    color: white;
+  }
+  .benefit-text strong {
+    display: block;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+  }
+  .benefit-text small {
+    font-weight: 400;
+    color: #cbcde0cc;
+  }
+  /* Scrollbar thin for categories */
+  .categories::-webkit-scrollbar {
+    height: 6px;
+  }
+  .categories::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .categories::-webkit-scrollbar-thumb {
+    background: rgba(219, 0, 255, 0.5);
+    border-radius: 20px;
+  }
+  /* Responsive */
+  @media (max-width: 920px) {
+    .hero {
+      flex-direction: column;
+      margin-bottom: 40px;
+    }
+    .hero-image {
+      max-width: 320px;
+      margin: 0 auto 20px auto;
+    }
+    nav {
+      margin-left: 20px;
+    }
+    .nav-links {
+      gap: 14px;
+      font-size: 0.85rem;
+    }
+    .categories {
+      padding: 0 10px;
+    }
+    .benefits-row {
+      flex-direction: column;
+      gap: 18px;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo" aria-label="Logo SNShop">
+    <img src="https://i.imgur.com/7LnH4Fi.png" alt="Mascota Zorro" class="logo-img" />
+    SN<span>SHOP</span>
+  </div>
+  <nav>
+    <ul class="nav-links" role="menubar">
+      <li role="none" class="active"><a href="#" role="menuitem" aria-current="page">Inicio</a></li>
+      <li role="none" class="dropdown">
+        <a href="#" role="menuitem" aria-haspopup="true" aria-expanded="false">Categorías ▼</a>
+        <ul class="dropdown-content" role="menu" aria-label="Categorías">
+          <li><a href="#" role="menuitem">Tecnología</a></li>
+          <li><a href="#" role="menuitem">Moda</a></li>
+          <li><a href="#" role="menuitem">Deportes</a></li>
+          <li><a href="#" role="menuitem">Hogar</a></li>
+          <li><a href="#" role="menuitem">Belleza</a></li>
+          <li><a href="#" role="menuitem">Juguetes</a></li>
+          <li><a href="#" role="menuitem">Accesorios</a></li>
+        </ul>
+      </li>
+      <li role="none"><a href="#" role="menuitem">Ofertas</a></li>
+      <li role="none"><a href="#" role="menuitem">Novedades</a></li>
+      <li role="none"><a href="#" role="menuitem">Nosotros</a></li>
+      <li role="none"><a href="#" role="menuitem">Contacto</a></li>
+    </ul>
+  </nav>
+  <form class="search-bar" role="search" aria-label="Buscar productos">
+    <input type="search" placeholder="Buscar productos..." aria-label="Buscar productos" name="search" />
+    <button type="submit" aria-label="Buscar">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M21.53 20.47l-4.825-4.825A7.944 7.944 0 0016 10a8 8 0 10-8 8 7.944 7.944 0 005.645-2.295l4.825 4.825a.75.75 0 001.06-1.06zM10 16a6 6 0 110-12 6 6 0 010 12z" />
+      </svg>
+    </button>
+  </form>
+  <div class="nav-icons" role="region" aria-label="Usuario y carrito">
+    <svg aria-label="Perfil" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round" class="feather feather-user" >
+      <path d="M20 21v-2a4 4 0 00-3-3.87"></path>
+      <path d="M4 21v-2a4 4 0 013-3.87"></path>
+      <circle cx="12" cy="7" r="4"></circle>
+    </svg>
+    <svg aria-label="Carrito de compras" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart" >
+      <circle cx="9" cy="21" r="1"></circle>
+      <circle cx="20" cy="21" r="1"></circle>
+      <path d="M1 1h4l2.68 13.39a2 2 0 001.992 1.61H19a2 2 0 001.94-1.41L23 6H6"></path>
+    </svg>
+  </div>
+</header>
+
+<main>
+  <section class="hero" aria-label="Banner principal">
+    <div class="hero-text">
+      <div class="label" aria-hidden="true">COMPRA</div>
+      <h1>DIFFERENTE. <span>VIVE MEJOR.</span></h1>
+      <p>Miles de productos increíbles al mejor precio y con envíos rápidos.</p>
+      <button class="btn-primary" type="button" aria-label="Comprar Ahora">COMPRAR AHORA</button>
+      <div class="benefits" aria-label="Beneficios principales">
+        <div class="benefit">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 20l-5.447-2.724A2 2 0 013 15.382V6a2 2 0 012-2h14a2 2 0 012 2v9.382a2 2 0 01-1.553 1.894L15 20"></path><path d="M22 22l-4-4"></path></svg>
+          <span>Envíos Rápidos</span>
+        </div>
+        <div class="benefit">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v20"></path><path d="M19 5L12 1 5 5"></path><path d="M19 15V5"></path><path d="M5 15v-5"></path></svg>
+          <span>Pago 100% Seguro</span>
+        </div>
+        <div class="benefit">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+          <span>Mejores Precios</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-image" aria-hidden="true">
+      <img src="https://i.imgur.com/7LnH4Fi.png" alt="Mascota zorro con bolsas de compras" />
+    </div>
+  </section>
+
+  <section class="categories" aria-label="Categorías principales">
+    <div class="category tech">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+        <line x1="1" y1="10" x2="23" y2="10"></line>
+      </svg>
+      Tecnología
+    </div>
+    <div class="category fashion">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 22s1-5 6-5 6 5 6 5"></path>
+        <path d="M12 12v9"></path>
+        <path d="M10 7a2 2 0 0 0 4 0"></path>
+        <path d="M4 10h16"></path>
+      </svg>
+      Moda
+    </div>
+    <div class="category sports">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="2" y1="12" x2="22" y2="12"></line>
+      </svg>
+      Deportes
+    </div>
+    <div class="category home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+      </svg>
+      Hogar
+    </div>
+    <div class="category beauty">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="M14.31 8l5.74 9.94"></path>
+        <path d="M9.69 8h11.48"></path>
+        <path d="M7.38 12l5.74-9.94"></path>
+        <path d="M9.69 16L3.95 6.06"></path>
+        <path d="M14.31 16H2.83"></path>
+        <path d="M16.62 12l-5.74 9.94"></path>
+      </svg>
+      Belleza
+    </div>
+    <div class="category toys">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+        <circle cx="12" cy="14" r="3"></circle>
+        <line x1="12" y1="7" x2="12" y2="3"></line>
+      </svg>
+      Juguetes
+    </div>
+    <div class="category accessories">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="M8 14s1-2 4-2 4 2 4 2"></path>
+        <path d="M12 22v-7"></path>
+      </svg>
+      Accesorios
+    </div>
+    <div class="category more">
+      Ver más →
+    </div>
+  </section>
+
+  <section class="benefits-row" aria-label="Beneficios de SNShop">
+    <div class="benefit-item" role="region" aria-labelledby="envios-rapidos">
+      <div class="benefit-icon" aria-hidden="true">🚚</div>
+      <div class="benefit-text">
+        <strong id="envios-rapidos">Envíos rápidos</strong>
+        <small>Recibe tus productos en tiempo récord.</small>
+      </div>
+    </div>
+    <div class="benefit-item" role="region" aria-labelledby="pago-seguro">
+      <div class="benefit-icon" aria-hidden="true">🔒</div>
+      <div class="benefit-text">
+        <strong id="pago-seguro">Pago seguro</strong>
+        <small>Tus pagos siempre protegidos.</small>
+      </div>
+    </div>
+    <div class="benefit-item" role="region" aria-labelledby="mejores-precios">
+      <div class="benefit-icon" aria-hidden="true">⭐</div>
+      <div class="benefit-text">
+        <strong id="mejores-precios">Mejores precios</strong>
+        <small>Te garantizamos los mejores precios.</small>
+      </div>
+    </div>
+    <div class="benefit-item" role="region" aria-labelledby="atencion-24-7">
+      <div class="benefit-icon" aria-hidden="true">🎧</div>
+      <div class="benefit-text">
+        <strong id="atencion-24-7">Atención 24/7</strong>
+        <small>Estamos para ayudarte siempre que lo necesites.</small>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>
