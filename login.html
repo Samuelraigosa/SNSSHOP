@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SNShop - Iniciar sesión</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  body {
+    margin: 0; background: #13142A; color: #ECECEC; font-family: 'Poppins', sans-serif;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    height: 100vh;
+  }
+  .container {
+    background: #1E1E3F; padding: 40px 50px; border-radius: 16px;
+    width: 320px; box-shadow: 0 0 20px rgb(219 0 255 / 0.3);
+  }
+  h2 {
+    margin-bottom: 1.4em;
+    font-weight: 700;
+    color: #FF6D05;
+    text-align: center;
+  }
+  form {
+    display: flex; flex-direction: column; gap: 1em;
+  }
+  label {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  input[type="email"], input[type="password"] {
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: none;
+    background: #22224A;
+    color: #ECECEC;
+    font-size: 1rem;
+    outline-color: #FF6D05;
+  }
+  input::placeholder {
+    color: #7777a7;
+  }
+  .btn-primary {
+    background: linear-gradient(90deg, #FF6D05, #DB00FF);
+    padding: 14px 0;
+    border-radius: 40px;
+    font-weight: 900;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    color: white;
+    box-shadow: 0 4px 15px rgb(219 0 255 / 0.7);
+    transition: all 0.3s ease;
+  }
+  .btn-primary:hover {
+    filter: brightness(1.2);
+    transform: translateY(-3px);
+  }
+  .links {
+    margin-top: 1em;
+    font-size: 0.85rem;
+    text-align: center;
+    color: #9999CC;
+  }
+  .links a {
+    color: #FF6D05;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .links a:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Iniciar sesión</h2>
+  <form>
+    <label for="email">Correo electrónico</label>
+    <input type="email" id="email" placeholder="tucorreo@email.com" required />
+    <label for="password">Contraseña</label>
+    <input type="password" id="password" placeholder="********" required />
+    <button type="submit" class="btn-primary">Iniciar sesión</button>
+  </form>
+  <div class="links">
+    ¿No tienes cuenta? <a href="registro.html">Regístrate</a>
+  </div>
+</div>
+
+</body>
+</html>

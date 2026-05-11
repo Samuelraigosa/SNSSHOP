@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SNShop - Pago</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  body {
+    margin:0; background:#13142A; color:#ECECEC; font-family:'Poppins', sans-serif;
+    padding: 90px 40px 40px 40px;
+  }
+  header {
+    position: fixed; top:0; left:0; right:0; height:60px; background:#141530; display:flex; align-items:center; justify-content:space-between; padding:0 50px; box-shadow:0 2px 8px rgb(0 0 0 / 0.7); z-index:1000;
+  }
+  .logo {
+    font-weight:900; font-size:1.5rem; color:#FF6D05;
+  }
+  nav ul {
+    list-style:none; display:flex; gap:1.8rem; margin:0; padding:0;
+  }
+  nav ul li {
+    font-weight:500; font-size:1rem; cursor:pointer;
+    color:#ECECEC;
+  }
+  nav ul li:hover {
+    color:#FF6D05;
+  }
+  main {
+    max-width: 700px;
+    margin: 0 auto;
+    background: #1B1B35;
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 0 0 10px rgb(219 0 255 / 0.3);
+  }
+  h2 {
+    font-weight: 700;
+    margin-bottom: 1em;
+    color: #FF6D05;
+    user-select:none;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: #ECECEC;
+  }
+  input, textarea, select {
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: none;
+    background: #22224A;
+    color: #ECECEC;
+    font-size: 1rem;
+    resize: vertical;
+  }
+  input::placeholder, textarea::placeholder {
+    color: #7777a7;
+  }
+  button {
+    background: linear-gradient(90deg, #FF6D05, #DB00FF);
+    padding: 14px 0;
+    border-radius: 40px;
+    font-weight: 900;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    color: white;
+    box-shadow: 0 4px 15px rgb(219 0 255 / 0.7);
+    transition: all 0.3s ease;
+    margin-top: 10px;
+  }
+  button:hover {
+    filter: brightness(1.2);
+    transform: translateY(-3px);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">SN<span style="color:#DB00FF">SHOP</span></div>
+  <nav>
+    <ul>
+      <li>Inicio</li>
+      <li>Categorías</li>
+      <li>Ofertas</li>
+      <li>Novedades</li>
+      <li>Nosotros</li>
+      <li>Contacto</li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <h2>Datos de envío</h2>
+  <form>
+    <label for="nombre">Nombre completo
+      <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre completo" required />
+    </label>
+
+    <label for="direccion">Dirección
+      <textarea id="direccion" name="direccion" placeholder="Calle, número, apartamento, etc." rows="3" required></textarea>
+    </label>
+
+    <label for="ciudad">Ciudad
+      <input type="text" id="ciudad" name="ciudad" placeholder="Ciudad" required />
+    </label>
+
+    <label for="correo">Correo electrónico
+      <input type="email" id="correo" name="correo" placeholder="ejemplo@correo.com" required />
+    </label>
+
+    <h2>Método de pago</h2>
+    <label for="tarjeta">Número de tarjeta
+      <input type="text" id="tarjeta" name="tarjeta" maxlength="19" placeholder="1234 5678 9012 3456" required />
+    </label>
+
+    <label for="vencimiento">Fecha de vencimiento (MM/AA)
+      <input type="text" id="vencimiento" name="vencimiento" maxlength="5" placeholder="MM/AA" required />
+    </label>
+
+    <label for="cvv">Código CVV
+      <input type="password" id="cvv" name="cvv" maxlength="4" placeholder="123" required />
+    </label>
+
+    <button type="submit">Pagar ahora</button>
+  </form>
+</main>
+
+</body>
+</html>
