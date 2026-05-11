@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SNShop - Carrito</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  body {
+    margin: 0; background: #13142A; color: #ECECEC; font-family: 'Poppins', sans-serif;
+    padding: 90px 40px 40px 40px;
+  }
+  header {
+    position: fixed; top: 0; left: 0; right: 0; height: 60px;
+    background: #141530; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 50px; box-shadow: 0 2px 8px rgb(0 0 0 / 0.7); z-index: 1000;
+  }
+  .logo {
+    font-weight: 900; font-size: 1.5rem; color: #FF6D05;
+  }
+  nav ul {
+    list-style: none; display: flex; gap: 1.8rem; margin: 0; padding: 0;
+  }
+  nav ul li {
+    font-weight: 500; font-size: 1rem; cursor: pointer; color: #ECECEC;
+  }
+  nav ul li:hover {
+    color: #FF6D05;
+  }
+  main {
+    display: flex; gap: 40px; max-width: 1100px; margin: 0 auto;
+  }
+  .carrito-lista {
+    flex: 2;
+    background: #1B1B35;
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgb(219 0 255 / 0.3);
+  }
+  .carrito-item {
+    display: flex; gap: 20px; border-bottom: 1px solid #3e3e6a;
+    padding-bottom: 18px; margin-bottom: 18px; align-items: center;
+  }
+  .carrito-item:last-child {
+    border-bottom: none; margin-bottom: 0; padding-bottom: 0;
+  }
+  .carrito-item img {
+    width: 90px; border-radius: 12px; background: #2B2B54;
+  }
+  .item-info {
+    flex: 1;
+  }
+  .item-nombre {
+    font-weight: 600; font-size: 1.1rem; margin-bottom: 5px;
+  }
+  .item-precio {
+    color: #FF6D05; font-weight: 700; margin-bottom: 10px;
+  }
+  .cantidad-control {
+    display: flex; align-items: center; background: #22224A;
+    border-radius: 30px; width: 120px;
+  }
+  .cantidad-control input[type=number] {
+    flex: 1;
+    text-align: center;
+    font-weight: 600;
+    background: transparent;
+    border: none;
+    color: #ECECEC;
+    font-size: 1rem;
+    outline: none;
+    -moz-appearance: textfield;
+  }
+  /* Remover flechas Firefox y Chrome */
+  .cantidad-control input::-webkit-outer-spin-button,
+  .cantidad-control input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .cantidad-control button {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #ECECEC;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  .resumen {
+    flex: 1;
+    background: #1B1B35;
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgb(219 0 255 / 0.3);
+    display: flex; flex-direction: column; gap: 15px; color: #ECECEC;
+  }
+  .resumen h3 {
+    margin-top: 0;
+    font-weight: 700;
+    font-size: 1.4rem;
+    border-bottom: 1px solid #3e3e6a;
+    padding-bottom: 15px;
+  }
+  .resumen-row {
+    display: flex; justify-content: space-between; font-weight: 600;
+  }
+  .total {
+    font-size: 1.6rem; color: #FF6D05; font-weight: 900;
+  }
+  .btn-primary {
+    background: linear-gradient(90deg, #FF6D05, #DB00FF);
+    padding: 14px 0;
+    border-radius: 40px;
+    font-weight: 900;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    color: white;
+    box-shadow: 0 4px 15px rgb(219 0 255 / 0.7);
+    transition: all 0.3s ease;
+    margin-top: auto;
+  }
+  .btn-primary:hover {
+    filter: brightness(1.2);
+    transform: translateY(-3px);
+  }
+  a.seguir {
+    margin-top: 20px;
+    display: inline-block;
+    color: #FF6D05;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  a.seguir:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">SN<span style="color:#DB00FF">SHOP</span></div>
+  <nav>
+    <ul>
+      <li>Inicio</li>
+      <li>Categorías</li>
+      <li>Ofertas</li>
+      <li>Novedades</li>
+      <li>Nosotros</li>
+      <li>Contacto</li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="carrito-lista" aria-label="Lista de productos en el carrito">
+    <article class="carrito-item">
+      <img src="https://i.imgur.com/mzpqLMU.png" alt="Audífonos inalámbricos Pro" />
+      <div class="item-info">
+        <div class="item-nombre">Audífonos inalámbricos Pro</div>
+        <div class="item-precio">$159.99</div>
+        <div class="cantidad-control" aria-label="Control de cantidad">
+          <button type="button" aria-label="Disminuir cantidad">−</button>
+          <input type="number" min="1" max="99" value="1" aria-label="Cantidad"/>
+          <button type="button" aria-label="Aumentar cantidad">+</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="carrito-item">
+      <img src="https://i.imgur.com/1VlgkVw.png" alt="Smartwatch Series 8" />
+      <div class="item-info">
+        <div class="item-nombre">Smartwatch Series 8</div>
+        <div class="item-precio">$129.99</div>
+        <div class="cantidad-control" aria-label="Control de cantidad">
+          <button type="button" aria-label="Disminuir cantidad">−</button>
+          <input type="number" min="1" max="99" value="1" aria-label="Cantidad"/>
+          <button type="button" aria-label="Aumentar cantidad">+</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="carrito-item">
+      <img src="https://i.imgur.com/Hcu6z9U.png" alt="Mochila Urbana Azul" />
+      <div class="item-info">
+        <div class="item-nombre">Mochila Urbana Azul</div>
+        <div class="item-precio">$34.99</div>
+        <div class="cantidad-control" aria-label="Control de cantidad">
+          <button type="button" aria-label="Disminuir cantidad">−</button>
+          <input type="number" min="1" max="99" value="1" aria-label="Cantidad"/>
+          <button type="button" aria-label="Aumentar cantidad">+</button>
+        </div>
+      </div>
+    </article>
+
+    <a href="#" class="seguir" aria-label="Seguir comprando">← Seguir comprando</a>
+  </section>
+
+  <aside class="resumen" aria-label="Resumen del pedido">
+    <h3>Resumen del pedido</h3>
+    <div class="resumen-row">
+      <span>Subtotal</span>
+      <span id="subtotal">$324.97</span>
+    </div>
+    <div class="resumen-row">
+      <span>Envío</span>
+      <span>GRATIS</span>
+    </div>
+    <div class="resumen-row">
+      <span>Descuento</span>
+      <span id="descuento">-$20.00</span>
+    </div>
+    <div class="resumen-row total">
+      <span>Total</span>
+      <span id="total">$304.97</span>
+    </div>
+
+    <button class="btn-primary" aria-label="Proceder al pago">Proceder al pago</button>
+  </aside>
+</main>
+
+</body>
+</html>
