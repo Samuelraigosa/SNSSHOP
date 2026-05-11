@@ -60,23 +60,28 @@
     display: flex; align-items: center; background: #22224A;
     border-radius: 30px; width: 120px;
   }
-  .cantidad-control input[type=number] {
-    flex: 1;
-    text-align: center;
-    font-weight: 600;
-    background: transparent;
-    border: none;
-    color: #ECECEC;
-    font-size: 1rem;
-    outline: none;
-    -moz-appearance: textfield;
-  }
-  /* Remover flechas Firefox y Chrome */
-  .cantidad-control input::-webkit-outer-spin-button,
-  .cantidad-control input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
+ .cantidad-control input[type=number] {
+  flex: 1;
+  text-align: center;
+  font-weight: 600;
+  background: transparent;
+  border: none;
+  color: #ECECEC;
+  font-size: 1rem;
+  outline: none;
+  -moz-appearance: textfield;
+  -webkit-appearance: textfield; 
+  appearance: textfield;          
+}
+
+
+.cantidad-control input::-webkit-outer-spin-button,
+.cantidad-control input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  appearance: none; 
+  margin: 0;
+}
+  
   .cantidad-control button {
     flex: 1;
     background: transparent;
