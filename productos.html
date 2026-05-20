@@ -21,21 +21,10 @@
     padding-bottom: 40px;
   }
   a { text-decoration: none; color: inherit; }
-  
-  /* Header */
   header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
-    background: #141530;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 50px;
-    box-shadow: 0 2px 8px rgb(0 0 0 / 0.7);
-    z-index: 1000;
+    position: fixed; top: 0; left: 0; right: 0; height: 60px;
+    background: #141530; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 50px; box-shadow: 0 2px 8px rgb(0 0 0 / 0.7); z-index: 1000;
   }
   .logo {
     font-weight: 900;
@@ -96,8 +85,6 @@
     transition: fill 0.3s;
   }
   .nav-icons svg:hover { fill: #FF6D05; }
-
-  /* Main */
   main {
     max-width: 1200px;
     margin: 0 auto;
@@ -109,8 +96,6 @@
     margin: 30px 0 20px 0;
     color: #FF6D05;
   }
-  
-  /* Filters */
   .filters {
     margin-bottom: 30px;
     display: flex;
@@ -132,8 +117,6 @@
   .filter-group.active {
     background: linear-gradient(90deg, #FF6D05, #DB00FF);
   }
-  
-  /* Products Grid */
   .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -178,10 +161,6 @@
     color: #FF6D05;
     margin: 0;
   }
-  .product-rating {
-    color: #FFD700;
-    font-size: 1.1rem;
-  }
   .icon-button {
     background: linear-gradient(90deg, #FF6D05, #DB00FF);
     border: none;
@@ -198,15 +177,12 @@
     filter: brightness(1.2);
     transform: scale(1.02);
   }
-
-  /* No results */
   .no-results {
     text-align: center;
     padding: 60px 20px;
     color: #9999CC;
     font-size: 1.2rem;
   }
-  
   @media (max-width: 768px) {
     header { padding: 0 20px; }
     nav { display: none; }
@@ -248,161 +224,130 @@
 
 <main>
   <h1 class="page-title" id="page-title">Todos los productos</h1>
-  
+
   <div class="filters">
     <button class="filter-group active" data-filter="todos">Todas</button>
-    <button class="filter-group" data-filter="tecnologia">Tecnología</button>
-    <button class="filter-group" data-filter="moda">Moda</button>
-    <button class="filter-group" data-filter="deportes">Deportes</button>
-    <button class="filter-group" data-filter="belleza">Belleza</button>
-    <button class="filter-group" data-filter="hogar">Hogar</button>
-    <button class="filter-group" data-filter="accesorios">Accesorios</button>
+    <button class="filter-group" data-filter="Tecnología">Tecnología</button>
+    <button class="filter-group" data-filter="Moda">Moda</button>
+    <button class="filter-group" data-filter="Deportes">Deportes</button>
+    <button class="filter-group" data-filter="Belleza">Belleza</button>
+    <button class="filter-group" data-filter="Hogar">Hogar</button>
+    <button class="filter-group" data-filter="Accesorios">Accesorios</button>
   </div>
 
-  <section class="products-grid" id="products-grid">
-    <!-- Productos se cargan desde JS -->
-  </section>
-  
+  <section class="products-grid" id="products-grid"></section>
+
   <div class="no-results" id="no-results" style="display: none;">
     No se encontraron productos con ese criterio de búsqueda.
   </div>
 </main>
 
 <script>
-  // base de datos de productos
-  const productosDB = [
-    { id: "1", nombre: "Airpods Pro 2", precio: 159.99, categoria: "tecnologia", imagen: "img/airpods_pro.png", rating: 4 },
-    { id: "2", nombre: "Smartwatch Series 8", precio: 129.99, categoria: "tecnologia", imagen: "img/Smartwatch.png", rating: 5 },
-    { id: "3", nombre: "PlayStation 5", precio: 400.00, categoria: "tecnologia", imagen: "img/playstation.png", rating: 3 },
-    { id: "4", nombre: "Camiseta Nike", precio: 29.99, categoria: "moda", imagen: "img/camiseta.png", rating: 4 },
-    { id: "5", nombre: "Zapatillas Adidas", precio: 89.99, categoria: "moda", imagen: "img/zapatillas.png", rating: 5 },
-    { id: "6", nombre: "Balón de Fútbol", precio: 19.99, categoria: "deportes", imagen: "img/balon.png", rating: 4 },
-    { id: "7", nombre: "Raqueta Tenis", precio: 59.99, categoria: "deportes", imagen: "img/raqueta.png", rating: 4 },
-    { id: "8", nombre: "Maquina Cremora", precio: 149.99, categoria: "belleza", imagen: "img/cremora.png", rating: 5 },
-    { id: "9", nombre: "Lámpara LED", precio: 24.99, categoria: "hogar", imagen: "img/lampara.png", rating: 4 },
-    { id: "10", nombre: "Reloj Apple", precio: 199.99, categoria: "accesorios", imagen: "img/reloj.png", rating: 5 },
-  ];
+  let productosDB = [];
 
-  // Obtener parámetros de URL
   const params = new URLSearchParams(window.location.search);
   const categoryParam = params.get('cat');
   const ofertaParam = params.get('oferta');
   const nuevaParam = params.get('nueva');
   const queryParam = params.get('q');
 
-  //渲染 estrellas
-  function getStars(rating) {
-    let stars = '';
-    for (let i = 1; i <= 5; i++) {
-      stars += i <= rating ? '★' : '☆';
+  const titulo = document.getElementById('page-title');
+
+  async function cargarProductos() {
+    try {
+      const url = 'http://localhost:3000/api/productos';
+      const res = await fetch(url);
+      productosDB = await res.json();
+
+      filtrar();
+    } catch (error) {
+      console.error('Error al cargar productos:', error);
     }
-    return stars;
   }
 
-  //渲染和产品
   function renderizarProductos(productos) {
     const grid = document.getElementById('products-grid');
     const noResults = document.getElementById('no-results');
-    
     grid.innerHTML = '';
-    
+
     if (productos.length === 0) {
       grid.style.display = 'none';
       noResults.style.display = 'block';
       return;
     }
-    
+
     grid.style.display = 'grid';
     noResults.style.display = 'none';
-    
+
     productos.forEach(producto => {
       const card = document.createElement('article');
       card.className = 'product-card';
       card.innerHTML = `
         <div class="product-img">
-          <img src="${producto.imagen}" alt="${producto.nombre}" onerror="this.src='img/zorro.png.png'"/>
+          <img src="${producto.imagen}" alt="${producto.nombre}" onerror="this.src='img/zorro.png.png'" />
         </div>
         <h3 class="product-name">${producto.nombre}</h3>
-        <p class="product-price">$${producto.precio.toFixed(2)}</p>
-        <div class="product-rating">${getStars(producto.rating)}</div>
+        <p class="product-price">$${parseFloat(producto.precio).toFixed(2)}</p>
         <button class="icon-button add-to-cart" data-id="${producto.id}">Agregar</button>
       `;
       grid.appendChild(card);
     });
-    
-    // Agregar eventos a botones
+
     document.querySelectorAll('.add-to-cart').forEach(btn => {
       btn.addEventListener('click', () => agregarAlCarrito(btn.dataset.id));
     });
   }
 
-  // Agregar al carrito
+  function filtrar() {
+    let filtrados = productosDB;
+
+    if (categoryParam) {
+      filtrados = filtrados.filter(p => p.categoria_nombre === categoryParam);
+      titulo.textContent = categoryParam;
+    } else if (ofertaParam) {
+      filtrados = filtrados.filter(p => p.oferta == 1 || p.oferta === true);
+      titulo.textContent = '🔥 Ofertas Especiales';
+    } else if (nuevaParam) {
+      titulo.textContent = '✨ Nuevos Productos';
+    } else if (queryParam) {
+      filtrados = filtrados.filter(p => p.nombre.toLowerCase().includes(queryParam.toLowerCase()));
+      titulo.textContent = `Resultados: "${queryParam}"`;
+    } else {
+      titulo.textContent = 'Todos los productos';
+    }
+
+    renderizarProductos(filtrados);
+  }
+
   function agregarAlCarrito(id) {
-    const producto = productosDB.find(p => p.id === id);
+    const producto = productosDB.find(p => p.id == id);
     if (!producto) return;
-    
+
     let carrito = JSON.parse(localStorage.getItem('carritoSNShop')) || [];
-    const existente = carrito.find(p => p.id === id);
-    
+    const existente = carrito.find(p => p.id == id);
     if (existente) {
       existente.cantidad++;
     } else {
       carrito.push({...producto, cantidad: 1});
     }
-    
+
     localStorage.setItem('carritoSNShop', JSON.stringify(carrito));
-    alert(`"${producto.nombre}" agregado al carrito!`);
+    alert(`Producto "${producto.nombre}" agregado al carrito.`);
   }
 
-  // Filtrar productos
-  function filtrar(categoria) {
-    let filtrados = productosDB;
-    
-    if (categoria && categoria !== 'todos') {
-      filtrados = productosDB.filter(p => p.categoria === categoria);
-    }
-    
-    // Si hay búsqueda
-    if (queryParam) {
-      filtrados = productosDB.filter(p => 
-        p.nombre.toLowerCase().includes(queryParam.toLowerCase())
-      );
-    }
-    
-    renderizarProductos(filtrados);
-  }
-
-  // Determinar título y filtro inicial
-  let filtroActual = 'todos';
-  const titulo = document.getElementById('page-title');
-  
-  if (categoryParam) {
-    filtroActual = categoryParam;
-    titulo.textContent = categoryParam.charAt(0).toUpperCase() + categoryParam.slice(1);
-  } else if (ofertaParam) {
-    titulo.textContent = '🔥 Ofertas Especiales';
-  } else if (nuevaParam) {
-    titulo.textContent = '✨ Nuevos Productos';
-  } else if (queryParam) {
-    titulo.textContent = `Resultados: "${queryParam}"`;
-  } else {
-    titulo.textContent = 'Todos los productos';
-  }
-
-  // Marcar filtro activo
-  document.querySelectorAll('.filter-group').forEach(btn => {
-    if (btn.dataset.filter === filtroActual) {
-      btn.classList.add('active');
-    }
-    btn.addEventListener('click', () => {
-      window.location.href = btn.dataset.filter === 'todos' 
-        ? 'productos.html' 
-        : `productos.html?cat=${btn.dataset.filter}`;
+  document.addEventListener('DOMContentLoaded', () => {
+    cargarProductos();
+    document.querySelectorAll('.filter-group').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const categoria = btn.dataset.filter;
+        if (!categoria || categoria === 'todos') {
+          window.location.href = 'productos.html';
+        } else {
+          window.location.href = `productos.html?cat=${categoria}`;
+        }
+      });
     });
   });
-
-  // Inicializar
-  filtrar(filtroActual);
 </script>
 
 </body>

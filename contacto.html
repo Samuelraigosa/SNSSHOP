@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SNShop - Contacto</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #13142A;
+    color: #ECECEC;
+    font-family: 'Poppins', sans-serif;
+    padding-top: 70px;
+    padding-bottom: 40px;
+  }
+  a { text-decoration: none; color: inherit; }
+  
+  header {
+    position: fixed; top: 0; left: 0; right: 0; height: 60px;
+    background: #141530; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 50px; box-shadow: 0 2px 8px rgb(0 0 0 / 0.7); z-index: 1000;
+  }
+  .logo { font-weight: 900; font-size: 1.5rem; color: #FF6D05; }
+  .logo span { color: #DB00FF; }
+  nav ul { list-style: none; display: flex; gap: 1.8rem; margin: 0; padding: 0; }
+  nav ul li { font-weight: 500; font-size: 1rem; cursor: pointer; color: #ECECEC; transition: color 0.3s; }
+  nav ul li:hover, nav ul li.active { color: #FF6D05; }
+  .nav-icons { display: flex; gap: 15px; }
+  .nav-icons a { display: flex; }
+  .nav-icons svg { fill: #ECECEC; width: 22px; height: 22px; cursor: pointer; transition: fill 0.3s; }
+  .nav-icons svg:hover { fill: #FF6D05; }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+  
+  .page-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 40px 0 40px 0;
+    color: #FF6D05;
+    text-align: center;
+  }
+  
+  .contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  
+  
+  .contact-info {
+    background: #1B1B35;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 0 20px rgb(219 0 255 / 0.3);
+  }
+  .contact-info h2 {
+    color: #FF6D05;
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+  }
+
+  .info-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+  .info-item .icono {
+    width: 45px;
+    height: 45px;
+    background: #22224A;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .info-item .icono img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+  .info-item .details h4 {
+    margin: 0 0 5px 0;
+    color: #ECECEC;
+  }
+  .info-item .details p {
+    margin: 0;
+    color: #9999CC;
+  }
+  .info-item .details a {
+    color: #FF6D05;
+  }
+  
+
+  .redes {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid #3e3e6a;
+  }
+  .redes h4 {
+    margin: 0 0 15px 0;
+    color: #ECECEC;
+  }
+  .redes-grid {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  .red-social {
+    width: 45px;
+    height: 45px;
+    background: #22224A;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    overflow: hidden;
+  }
+  .red-social img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    object-position: center;
+  }
+  .red-social:hover {
+    background: linear-gradient(90deg, #FF6D05, #DB00FF);
+    transform: translateY(-5px);
+  }
+  
+  
+  .contact-form {
+    background: #1B1B35;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 0 20px rgb(219 0 255 / 0.3);
+  }
+  .contact-form h2 {
+    color: #FF6D05;
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #ECECEC;
+  }
+  input, textarea, select {
+    padding: 14px 18px;
+    border-radius: 10px;
+    border: none;
+    background: #22224A;
+    color: #ECECEC;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    resize: vertical;
+    transition: outline 0.3s;
+  }
+  input:focus, textarea:focus, select:focus {
+    outline: 2px solid #FF6D05;
+  }
+  input::placeholder, textarea::placeholder {
+    color: #7777a7;
+  }
+  .btn-primary {
+    background: linear-gradient(90deg, #FF6D05, #DB00FF);
+    padding: 16px 0;
+    border-radius: 40px;
+    font-weight: 900;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    color: white;
+    box-shadow: 0 4px 15px rgb(219 0 255 / 0.7);
+    transition: all 0.3s ease;
+  }
+  .btn-primary:hover {
+    filter: brightness(1.2);
+    transform: translateY(-3px);
+  }
+  
+  .somos-online {
+    background: linear-gradient(135deg, #1B1B35 0%, #2a1a57 100%);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    margin-top: 40px;
+    box-shadow: 0 0 20px rgb(219 0 255 / 0.3);
+  }
+  .somos-online h3 {
+    color: #FF6D05;
+    margin-bottom: 10px;
+  }
+  .somos-online p {
+    color: #9999CC;
+    line-height: 1.7;
+  }
+  
+  /* Success message */
+  .success-message {
+    display: none;
+    text-align: center;
+    padding: 40px;
+  }
+  .success-message svg {
+    width: 80px;
+    height: 80px;
+    fill: #37bc1a;
+    margin-bottom: 20px;
+  }
+  .success-message h3 {
+    color: #37bc1a;
+    margin-bottom: 10px;
+  }
+  .success-message p {
+    color: #9999CC;
+  }
+  
+  @media (max-width: 768px) {
+    .contact-container { grid-template-columns: 1fr; }
+    nav { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">SN<span>SHOP</span></a>
+  <nav>
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="productos.html">Productos</a></li>
+      <li><a href="productos.html?oferta=true">Ofertas</a></li>
+      <li><a href="productos.html?nueva=true">Novedades</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li class="active"><a href="contacto.html">Contacto</a></li>
+    </ul>
+  </nav>
+  <div class="nav-icons">
+    <a href="login.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-3-3.87"/><path d="M4 21v-2a4 4 0 013-3.87"/><circle cx="12" cy="7" r="4"/></svg></a>
+    <a href="carrito.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 001.992 1.61H19a2 2 0 001.94-1.41L23 6H6"/></svg></a>
+  </div>
+</header>
+
+<main>
+  <h1 class="page-title">📞 Contáctanos</h1>
+  
+  <div class="contact-container">
+    
+    <section class="contact-info">
+      <h2>Información de contacto</h2>
+      
+      
+      <div class="info-item">
+        <div class="icono">
+          <img src="img/gmail.png.png" alt="Gmail" />
+        </div>
+        <div class="details">
+          <h4>Email</h4>
+          <a href="mailto:snshop@gmail.com">snshop@gmail.com</a>
+        </div>
+      </div>
+      
+      
+      <div class="info-item">
+        <div class="icono">
+          <img src="img/whatsapp.png" alt="WhatsApp" />
+        </div>
+        <div class="details">
+          <h4>WhatsApp</h4>
+          <a href="https://wa.me/573133619618">+57 313 361 9618</a>
+        </div>
+      </div>
+      
+      
+      <div class="info-item">
+        <div class="icono">
+          <img src="img/whatsapp.png" alt="Teléfono" />
+        </div>
+        <div class="details">
+          <h4>Teléfono</h4>
+          <p>+57 313 361 9618</p>
+        </div>
+      </div>
+      
+     
+      <div class="redes">
+        <h4>Síguenos en redes</h4>
+        <div class="redes-grid">
+          <a href="https://facebook.com/snshop" target="_blank" class="red-social" title="Facebook">
+            <img src="img/facebook.png" alt="Facebook" />
+          </a>
+          <a href="https://instagram.com/snshop" target="_blank" class="red-social" title="Instagram">
+            <img src="img/Instagram1.png.png" alt="Instagram" />
+          </a>
+          <a href="https://twitter.com/snshop" target="_blank" class="red-social" title="Twitter">
+            <img src="img/X1.png.png" alt="Twitter" />
+          </a>
+          <a href="https://wa.me/573133619618" target="_blank" class="red-social" title="WhatsApp">
+            <img src="img/whatsapp.png" alt="WhatsApp" />
+          </a>
+        </div>
+      </div>
+    </section>
+    
+    <section class="contact-form">
+      <h2>Envíanos un mensaje</h2>
+      
+      <form id="form-contacto">
+        <label for="nombre">Nombre completo</label>
+        <input type="text" id="nombre" placeholder="Tu nombre completo" required />
+        
+        <label for="email">Correo electrónico</label>
+        <input type="email" id="email" placeholder="tu@email.com" required />
+        
+        <label for="telefono">Teléfono (opcional)</label>
+        <input type="tel" id="telefono" placeholder="+57 313 361 9618" />
+        
+        <label for="asunto">Asunto</label>
+        <select id="asunto" required>
+          <option value="">Selecciona un asunto</option>
+          <option value="consulta">Consulta sobre producto</option>
+          <option value="pedido">Estado de pedido</option>
+          <option value="devolucion">Devolución</option>
+          <option value="sugerencia">Sugerencia</option>
+          <option value="otro">Otro</option>
+        </select>
+        
+        <label for="mensaje">Mensaje</label>
+        <textarea id="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
+        
+        <button type="submit" class="btn-primary">📨 Enviar Mensaje</button>
+      </form>
+      
+      <div class="success-message" id="success-message">
+        <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <h3>¡Mensaje enviado!</h3>
+        <p>Gracias por contactarnos. Te responderemos en máximo 24 horas.</p>
+      </div>
+    </section>
+  </div>
+  
+ 
+  <section class="somos-online">
+    <h3>🛒 Somos una tienda online</h3>
+    <p>SNShop es una tienda 100% virtual. No tenemos punto físico, pero estamos disponibles para atenderte a través de WhatsApp, correo electrónico o este formulario. ¡Responderemos todas tus consultas!</p>
+  </section>
+</main>
+
+<script>
+  const form = document.getElementById('form-contacto');
+  const successMessage = document.getElementById('success-message');
+  
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    form.style.display = 'none';
+    successMessage.style.display = 'block';
+    
+    setTimeout(() => {
+      form.reset();
+      form.style.display = 'flex';
+      successMessage.style.display = 'none';
+    }, 5000);
+  });
+</script>
+
+</body>
+</html>

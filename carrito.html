@@ -16,78 +16,48 @@
     padding-bottom: 40px;
   }
   a { text-decoration: none; color: inherit; }
-  
-  /* Header */
   header {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
-    background: #141530;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 50px;
-    box-shadow: 0 2px 8px rgb(0 0 0 / 0.7);
+    top: 0; left: 0; right: 0; height: 60px;
+    background: #141530; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 50px; box-shadow: 0 2px 8px rgb(0 0 0 / 0.7);
     z-index: 1000;
   }
   .logo {
-    font-weight: 900;
-    font-size: 1.5rem;
-    color: #FF6D05;
+    font-weight: 900; font-size: 1.5rem; color: #FF6D05;
   }
   .logo span { color: #DB00FF; }
   nav ul {
-    list-style: none;
-    display: flex;
-    gap: 1.8rem;
-    margin: 0;
-    padding: 0;
+    list-style: none; display: flex; gap: 1.8rem; margin: 0; padding: 0;
   }
   nav ul li {
-    font-weight: 500;
-    font-size: 1rem;
-    cursor: pointer;
-    color: #ECECEC;
+    font-weight: 500; font-size: 1rem; cursor: pointer; color: #ECECEC;
     transition: color 0.3s;
   }
-  nav ul li:hover,
-  nav ul li.active {
-    color: #FF6D05;
-  }
+  nav ul li:hover, nav ul li.active { color: #FF6D05; }
   .nav-icons {
-    display: flex;
-    gap: 15px;
+    display: flex; gap: 15px;
   }
   .nav-icons a {
-    display: flex;
-    align-items: center;
+    display: flex; align-items: center;
   }
   .nav-icons svg {
     fill: #ECECEC;
-    width: 22px;
-    height: 22px;
-    cursor: pointer;
-    transition: fill 0.3s;
+    width: 22px; height: 22px;
+    cursor: pointer; transition: fill 0.3s;
   }
   .nav-icons svg:hover { fill: #FF6D05; }
-
-  /* Main */
   main {
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 20px;
   }
   .page-title {
-    font-size: 2rem;
-    font-weight: 700;
-    margin: 30px 0 30px 0;
-    color: #FF6D05;
+    font-size: 2rem; font-weight: 700;
+    margin: 30px 0 30px 0; color: #FF6D05;
   }
   .carrito-container {
-    display: flex;
-    gap: 40px;
+    display: flex; gap: 40px;
   }
   .carrito-lista {
     flex: 2;
@@ -97,43 +67,29 @@
     box-shadow: 0 0 15px rgb(219 0 255 / 0.3);
   }
   .carrito-item {
-    display: flex;
-    gap: 20px;
+    display: flex; gap: 20px;
     border-bottom: 1px solid #3e3e6a;
     padding: 18px 0;
     align-items: center;
   }
   .carrito-item:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-    padding-bottom: 0;
+    border-bottom: none; margin-bottom: 0; padding-bottom: 0;
   }
   .carrito-item img {
-    width: 100px;
-    border-radius: 12px;
-    background: #2B2B54;
-    object-fit: contain;
+    width: 100px; border-radius: 12px; background: #2B2B54; object-fit: contain;
   }
   .item-info {
     flex: 1;
   }
   .item-nombre {
-    font-weight: 700;
-    font-size: 1.1rem;
-    margin-bottom: 8px;
+    font-weight: 700; font-size: 1.1rem; margin-bottom: 8px;
   }
   .item-precio {
-    color: #FF6D05;
-    font-weight: 700;
-    font-size: 1.2rem;
-    margin-bottom: 12px;
+    color: #FF6D05; font-weight: 700; font-size: 1.2rem; margin-bottom: 12px;
   }
   .cantidad-control {
-    display: flex;
-    align-items: center;
-    background: #22224A;
-    border-radius: 30px;
-    width: 120px;
+    display: flex; align-items: center; background: #22224A;
+    border-radius: 30px; width: 120px;
   }
   .cantidad-control input[type="number"] {
     flex: 1;
@@ -177,8 +133,6 @@
   .btn-eliminar:hover {
     background: #ff2a55;
   }
-
-  /* Resumen */
   .resumen {
     flex: 1;
     background: #1B1B35;
@@ -241,43 +195,13 @@
   .btn-volver:hover {
     text-decoration: underline;
   }
-
-  /* Carrito vacío */
   .carrito-vacio {
     text-align: center;
     padding: 60px 20px;
     color: #9999CC;
-  }
-  .carrito-vacio svg {
-    width: 80px;
-    height: 80px;
-    fill: #3e3e6a;
-    margin-bottom: 20px;
-  }
-  .carrito-vacio p {
+    font-style: italic;
     font-size: 1.2rem;
-    margin-bottom: 25px;
-  }
-  .btn-comprar {
-    display: inline-block;
-    background: linear-gradient(90deg, #FF6D05, #DB00FF);
-    padding: 14px 30px;
-    border-radius: 40px;
-    font-weight: 700;
-    color: white;
-    text-decoration: none;
-  }
-  .btn-comprar:hover {
-    filter: brightness(1.2);
-  }
-
-  @media (max-width: 768px) {
-    .carrito-container {
-      flex-direction: column;
-    }
-    .resumen {
-      position: static;
-    }
+    margin-top: 50px;
   }
 </style>
 </head>
@@ -309,11 +233,13 @@
   <h1 class="page-title">🛒 Mi Carrito</h1>
   
   <div class="carrito-container">
-    <section class="carrito-lista" id="carrito-lista">
-      <!-- Productos se cargan desde JS -->
-    </section>
+    <section class="carrito-lista" aria-label="Lista de productos en el carrito"></section>
 
-    <aside class="resumen" id="resumen">
+    <div class="carrito-vacio" aria-label="Carrito vacío" style="display:none;">
+      Tu carrito está vacío
+    </div>
+
+    <aside class="resumen" aria-label="Resumen del pedido" style="display:none;">
       <h3>Resumen del pedido</h3>
       <div class="resumen-row">
         <span>Subtotal</span>
@@ -321,7 +247,7 @@
       </div>
       <div class="resumen-row">
         <span>Envío</span>
-        <span style="color: #37bc1a;">GRATIS</span>
+        <span>GRATIS</span>
       </div>
       <div class="resumen-row">
         <span>Descuento</span>
@@ -331,26 +257,20 @@
         <span>Total</span>
         <span id="total">$0.00</span>
       </div>
-      <button class="btn-primary" id="btn-pagar" disabled>Proceder al pago</button>
-      <a href="productos.html" class="btn-volver">← Seguir Comprando</a>
+      <button class="btn-primary" aria-label="Proceder al pago" disabled>Proceder al pago</button>
+      <a href="productos.html" class="btn-volver">Seguir comprando</a>
     </aside>
-  </div>
-
-  <div class="carrito-vacio" id="carrito-vacio" style="display: none;">
-    <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 001.992 1.61H19a2 2 0 001.94-1.41L23 6H6"/></svg>
-    <p>Tu carrito está vacío</p>
-    <a href="productos.html" class="btn-comprar">¡Empezar a comprar!</a>
   </div>
 </main>
 
 <script>
-  const carritoLista = document.getElementById('carrito-lista');
-  const carritoVacioMsg = document.getElementById('carrito-vacio');
-  const resumen = document.getElementById('resumen');
+  const carritoLista = document.querySelector('.carrito-lista');
+  const carritoVacioMsg = document.querySelector('.carrito-vacio');
+  const resumen = document.querySelector('.resumen');
   const subtotalElem = document.getElementById('subtotal');
   const descuentoElem = document.getElementById('descuento');
   const totalElem = document.getElementById('total');
-  const btnPagar = document.getElementById('btn-pagar');
+  const btnPagar = resumen.querySelector('.btn-primary');
 
   let carrito = JSON.parse(localStorage.getItem('carritoSNShop')) || [];
 
@@ -380,7 +300,7 @@
         <div class="item-info">
           <div class="item-nombre">${item.nombre}</div>
           <div class="item-precio">$${item.precio.toFixed(2)}</div>
-          <div class="cantidad-control">
+          <div class="cantidad-control" aria-label="Control de cantidad">
             <button type="button" class="btn-decrease">−</button>
             <input type="number" min="1" max="99" value="${item.cantidad}" />
             <button type="button" class="btn-increase">+</button>
@@ -395,7 +315,6 @@
     descuentoElem.textContent = '-$0.00';
     totalElem.textContent = '$' + subtotal.toFixed(2);
 
-    // Evento付款按钮 -> Ir a pago.html
     btnPagar.onclick = () => {
       window.location.href = 'pago.html';
     };
@@ -462,7 +381,6 @@
     actualizarVista();
   }
 
-  // Función global para agregar productos desde otras páginas
   window.agregarProductoAlCarrito = function(producto) {
     const existente = carrito.find(p => p.id === producto.id);
     if (existente) {
@@ -473,7 +391,6 @@
     guardarYCambiarVista();
   };
 
-  // Inicializar
   actualizarVista();
 </script>
 
