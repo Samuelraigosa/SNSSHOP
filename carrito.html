@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SNShop - Carrito</title>
 <style>
+  /* Tu CSS existente sin cambios */
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
   * { box-sizing: border-box; }
   body {
@@ -235,8 +236,9 @@
   <div class="carrito-container">
     <section class="carrito-lista" aria-label="Lista de productos en el carrito"></section>
 
-    <div class="carrito-vacio" aria-label="Carrito vacío" style="display:none;">
+  <div class="carrito-vacio" aria-label="Carrito vacío" style="display:none;">
       Tu carrito está vacío
+      <div id="diag-carrito" style="margin-top:10px;font-size:.95rem;color:#b8b8e6;"></div>
     </div>
 
     <aside class="resumen" aria-label="Resumen del pedido" style="display:none;">
@@ -271,8 +273,12 @@
   const descuentoElem = document.getElementById('descuento');
   const totalElem = document.getElementById('total');
   const btnPagar = resumen.querySelector('.btn-primary');
+  const diagCarrito = document.getElementById('diag-carrito');
 
   let carrito = JSON.parse(localStorage.getItem('carritoSNShop')) || [];
+
+  // Depuración, imprime carrito en consola
+  console.log("Carrito cargado desde localStorage:", carrito);
 
   function actualizarVista() {
     carritoLista.innerHTML = '';
@@ -281,16 +287,19 @@
       carritoVacioMsg.style.display = 'block';
       resumen.style.display = 'none';
       btnPagar.disabled = true;
+      diagCarrito.textContent = `Tip: abre productos y carrito desde la misma URL base (mismo origen). Origen actual: ${location.origin}`;
       return;
     }
 
     carritoVacioMsg.style.display = 'none';
+    diagCarrito.textContent = '';
     resumen.style.display = 'flex';
     btnPagar.disabled = false;
 
     let subtotal = 0;
     carrito.forEach(item => {
-      subtotal += item.precio * item.cantidad;
+      const precioUnitario = Number(item.precio) || 0;
+      subtotal += precioUnitario * item.cantidad;
 
       const articulo = document.createElement('article');
       articulo.className = 'carrito-item';
@@ -299,7 +308,7 @@
         <img src="${item.imagen}" alt="${item.nombre}" onerror="this.src='img/zorro.png.png'"/>
         <div class="item-info">
           <div class="item-nombre">${item.nombre}</div>
-          <div class="item-precio">$${item.precio.toFixed(2)}</div>
+          <div class="item-precio">$${precioUnitario.toFixed(2)}</div>
           <div class="cantidad-control" aria-label="Control de cantidad">
             <button type="button" class="btn-decrease">−</button>
             <input type="number" min="1" max="99" value="${item.cantidad}" />
@@ -353,17 +362,17 @@
   }
 
   function cambiarCantidad(id, delta) {
-    const prod = carrito.find(p => p.id === id);
+    const prod = carrito.find(p => p.id == id);
     if (!prod) return;
     prod.cantidad += delta;
     if (prod.cantidad < 1) {
-      carrito = carrito.filter(p => p.id !== id);
+      carrito = carrito.filter(p => p.id != id);
     }
     guardarYCambiarVista();
   }
 
   function modificarCantidad(id, cantidad) {
-    const prod = carrito.find(p => p.id === id);
+    const prod = carrito.find(p => p.id == id);
     if (!prod) return;
     prod.cantidad = cantidad;
     guardarYCambiarVista();
@@ -371,7 +380,7 @@
 
   function eliminarProducto(id) {
     if (confirm('¿Eliminar este producto del carrito?')) {
-      carrito = carrito.filter(p => p.id !== id);
+      carrito = carrito.filter(p => p.id != id);
       guardarYCambiarVista();
     }
   }
@@ -382,7 +391,7 @@
   }
 
   window.agregarProductoAlCarrito = function(producto) {
-    const existente = carrito.find(p => p.id === producto.id);
+    const existente = carrito.find(p => p.id == producto.id);
     if (existente) {
       existente.cantidad++;
     } else {
@@ -392,6 +401,7 @@
   };
 
   actualizarVista();
+
 </script>
 
 </body>

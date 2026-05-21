@@ -184,11 +184,22 @@
     font-size: 1.2rem;
   }
   @media (max-width: 768px) {
-    header { padding: 0 20px; }
-    nav { display: none; }
-    .search { width: 180px; }
-    .filters { gap: 10px; }
-    .filter-group { padding: 10px 16px; font-size: 0.85rem; }
+    header {
+      padding: 0 20px;
+    }
+    nav {
+      display: none;
+    }
+    .search {
+      width: 180px;
+    }
+    .filters {
+      gap: 10px;
+    }
+    .filter-group {
+      padding: 10px 16px;
+      font-size: 0.85rem;
+    }
   }
 </style>
 </head>
@@ -227,12 +238,12 @@
 
   <div class="filters">
     <button class="filter-group active" data-filter="todos">Todas</button>
-    <button class="filter-group" data-filter="Tecnología">Tecnología</button>
-    <button class="filter-group" data-filter="Moda">Moda</button>
-    <button class="filter-group" data-filter="Deportes">Deportes</button>
-    <button class="filter-group" data-filter="Belleza">Belleza</button>
-    <button class="filter-group" data-filter="Hogar">Hogar</button>
-    <button class="filter-group" data-filter="Accesorios">Accesorios</button>
+    <button class="filter-group" data-filter="tecnologia">Tecnología</button>
+    <button class="filter-group" data-filter="moda">Moda</button>
+    <button class="filter-group" data-filter="deportes">Deportes</button>
+    <button class="filter-group" data-filter="belleza">Belleza</button>
+    <button class="filter-group" data-filter="hogar">Hogar</button>
+    <button class="filter-group" data-filter="accesorios">Accesorios</button>
   </div>
 
   <section class="products-grid" id="products-grid"></section>
@@ -258,7 +269,6 @@
       const url = 'http://localhost:3000/api/productos';
       const res = await fetch(url);
       productosDB = await res.json();
-
       filtrar();
     } catch (error) {
       console.error('Error al cargar productos:', error);
@@ -298,12 +308,24 @@
     });
   }
 
+  function normalizarTexto(texto) {
+    return (texto || '')
+      .toString()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .trim();
+  }
+
   function filtrar() {
     let filtrados = productosDB;
 
     if (categoryParam) {
-      filtrados = filtrados.filter(p => p.categoria_nombre === categoryParam);
-      titulo.textContent = categoryParam;
+      const categoryNormalizada = normalizarTexto(categoryParam);
+      filtrados = filtrados.filter(
+        p => normalizarTexto(p.categoria_nombre) === categoryNormalizada
+      );
+      titulo.textContent = categoryParam.charAt(0).toUpperCase() + categoryParam.slice(1);
     } else if (ofertaParam) {
       filtrados = filtrados.filter(p => p.oferta == 1 || p.oferta === true);
       titulo.textContent = '🔥 Ofertas Especiales';
@@ -323,21 +345,37 @@
     const producto = productosDB.find(p => p.id == id);
     if (!producto) return;
 
+    const productoNormalizado = {
+      ...producto,
+      id: String(producto.id),
+      precio: Number(producto.precio)
+    };
+
     let carrito = JSON.parse(localStorage.getItem('carritoSNShop')) || [];
-    const existente = carrito.find(p => p.id == id);
+    const existente = carrito.find(p => String(p.id) === String(productoNormalizado.id));
+
     if (existente) {
-      existente.cantidad++;
+      existente.cantidad = Number(existente.cantidad || 0) + 1;
     } else {
-      carrito.push({...producto, cantidad: 1});
+      carrito.push({ ...productoNormalizado, cantidad: 1 });
     }
 
     localStorage.setItem('carritoSNShop', JSON.stringify(carrito));
-    alert(`Producto "${producto.nombre}" agregado al carrito.`);
+    window.location.href = 'carrito.html';
   }
+  
 
   document.addEventListener('DOMContentLoaded', () => {
     cargarProductos();
+
+    const categoriaActual = normalizarTexto(categoryParam);
     document.querySelectorAll('.filter-group').forEach(btn => {
+      const filtroBoton = normalizarTexto(btn.dataset.filter);
+      btn.classList.toggle(
+        'active',
+        (!categoriaActual && filtroBoton === 'todos') || (categoriaActual && filtroBoton === categoriaActual)
+      );
+
       btn.addEventListener('click', () => {
         const categoria = btn.dataset.filter;
         if (!categoria || categoria === 'todos') {
