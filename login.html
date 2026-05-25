@@ -34,6 +34,15 @@
     text-align: center;
   }
   form { display: flex; flex-direction: column; gap: 1em; }
+  .mensaje {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    min-height: 20px;
+    text-align: center;
+  }
+  .mensaje.error { color: #ff7b7b; }
+  .mensaje.ok { color: #7CFFB2; }
   label {
     font-size: 0.9rem;
     font-weight: 600;
@@ -102,7 +111,7 @@
   
   <h2>Iniciar sesión</h2>
   
-  <form action="index.html" method="GET">
+  <form id="loginForm">
     <label for="email">Correo electrónico</label>
     <input type="email" id="email" placeholder="tucorreo@email.com" required />
     
@@ -111,6 +120,8 @@
     
     <button type="submit" class="btn-primary">Iniciar sesión</button>
   </form>
+
+  <div id="mensaje" class="mensaje"></div>
   
   <div class="links">
     ¿No tienes cuenta? <a href="registro.html">Regístrate</a>
@@ -119,5 +130,44 @@
   <a href="index.html" class="btn-volver">← Volver al inicio</a>
 </div>
 
+<script>
+  const form = document.getElementById('loginForm');
+  const mensaje = document.getElementById('mensaje');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    mensaje.textContent = '';
+    mensaje.className = 'mensaje';
+
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+
+    try {
+      const res = await fetch('http://localhost:3000/api/usuarios/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        mensaje.textContent = data.error || 'No se pudo iniciar sesión';
+        mensaje.classList.add('error');
+        return;
+      }
+
+      mensaje.textContent = data.mensaje || 'Inicio de sesión exitoso';
+      mensaje.classList.add('ok');
+
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 900);
+    } catch (error) {
+      mensaje.textContent = 'No se pudo conectar con el servidor';
+      mensaje.classList.add('error');
+    }
+  });
+</script>
 </body>
 </html>

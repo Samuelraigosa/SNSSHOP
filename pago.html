@@ -522,7 +522,7 @@
     resumenTotal.textContent = '$' + total.toFixed(2);
   }
 
-  // Formatea número de tarjeta
+  
   document.getElementById('tarjeta').addEventListener('input', function(e) {
     let value = e.target.value.replace(/\s/g, '').replace(/\D/g, '');
     let formatted = '';
@@ -533,7 +533,7 @@
     e.target.value = formatted;
   });
 
-  // Formatea fecha de vencimiento
+  
   document.getElementById('vencimiento').addEventListener('input', function(e) {
     let value = e.target.value.replace(/\D/g, '');
     if (value.length >= 2) {
@@ -542,11 +542,10 @@
     e.target.value = value;
   });
 
-  // Maneja el envío del formulario
   formPago.addEventListener('submit', function(e) {
     e.preventDefault();
 
-    // Recoge datos del formulario
+   
     const cliente = {
       nombre: document.getElementById('nombre').value,
       telefono: document.getElementById('prefijo').value + ' ' + document.getElementById('telefono').value,
@@ -561,7 +560,7 @@
       total: carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0)
     };
 
-    // Aquí podrías enviar `pedido` a backend con fetch, por ahora simulamos éxito
+    
 
     localStorage.removeItem('carritoSNShop');
     carrito = [];
@@ -569,16 +568,16 @@
     mostrarResumen(pedido);
   });
 
-  // Muestra el resumen y el mensaje de éxito
+  
   function mostrarResumen(pedido) {
     formContainer.style.display = 'none';
     successMessage.style.display = 'block';
 
-    // Genera un ID de orden simple
+    
     const idOrden = '#SN' + Math.floor(100000 + Math.random() * 900000);
     document.getElementById('orden-id').textContent = idOrden;
 
-    // Renderiza productos comprados
+    
     const resumenCompraItems = document.getElementById('resumen-compra-items');
     resumenCompraItems.innerHTML = '';
     pedido.productos.forEach(item => {
@@ -592,17 +591,17 @@
       resumenCompraItems.appendChild(div);
     });
 
-    // Total pagado
+    
     document.getElementById('resumen-compra-total').textContent = `$${pedido.total.toFixed(2)}`;
 
-    // Información de envío
+    
     document.getElementById('info-nombre').textContent = pedido.cliente.nombre;
     document.getElementById('info-telefono').textContent = pedido.cliente.telefono;
     document.getElementById('info-direccion').textContent = pedido.cliente.direccion;
     document.getElementById('info-ciudad').textContent = pedido.cliente.ciudad;
   }
 
-  // Inicializar con resumen del carrito
+  
   cargarResumen();
 </script>
 

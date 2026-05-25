@@ -1,6 +1,4 @@
-# TODO - Corrección de filtros de categorías
-
-- [x] Actualizar botones de categorías en `productos.html` para usar slugs consistentes.
-- [x] Implementar normalización de categorías (sin acentos/mayúsculas) en el filtrado por `cat`.
-- [x] Sincronizar estado activo del botón de filtro según parámetros de URL.
-- [ ] Verificar que enlaces desde `index.html` y botones de `productos.html` muestren productos correctamente.
+- [x] Revisar scripts de arranque en backend/package.json
+- [ ] Iniciar servidor backend y capturar errores de ejecución
+- [ ] Probar endpoint /api/usuarios/login localmente para confirmar causa
+- [ ] Aplicar corrección mínima necesaria (config DB/arranque/URL) y validar
