@@ -234,6 +234,7 @@
 </head>
 <body>
 
+<!-- Encabezado superior con navegación e iconos de acceso -->
 <header>
   <a href="index.html" class="logo">SN<span>SHOP</span></a>
   <nav>
@@ -253,10 +254,12 @@
 </header>
 
 <main>
+  <!-- Título principal de la sección de contacto -->
   <h1 class="page-title">📞 Contáctanos</h1>
   
   <div class="contact-container">
     
+    <!-- Bloque informativo con canales de contacto y redes sociales -->
     <section class="contact-info">
       <h2>Información de contacto</h2>
       
@@ -313,6 +316,7 @@
       </div>
     </section>
     
+    <!-- Formulario de contacto para recibir mensajes del cliente -->
     <section class="contact-form">
       <h2>Envíanos un mensaje</h2>
       
@@ -351,6 +355,7 @@
   </div>
   
  
+  <!-- Sección aclaratoria sobre el modelo de tienda online -->
   <section class="somos-online">
     <h3>🛒 Somos una tienda online</h3>
     <p>SNShop es una tienda 100% virtual. No tenemos punto físico, pero estamos disponibles para atenderte a través de WhatsApp, correo electrónico o este formulario. ¡Responderemos todas tus consultas!</p>
@@ -358,9 +363,11 @@
 </main>
 
 <script>
+  // Referencias al formulario y al mensaje de confirmación
   const form = document.getElementById('form-contacto');
   const successMessage = document.getElementById('success-message');
   
+  // Simula el envío del formulario mostrando un mensaje de éxito temporal
   form.addEventListener('submit', function(e) {
     e.preventDefault();
     

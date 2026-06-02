@@ -94,6 +94,7 @@
 </style>
 </head>
 <body>
+<!-- Contenedor principal del formulario de registro de usuarios -->
 
 <div class="container">
   <div class="logo">
@@ -102,6 +103,7 @@
   
   <h2>Crear cuenta</h2>
   
+  <!-- Formulario para crear una nueva cuenta en la plataforma -->
   <form id="registroForm">
     <label for="nombre">Nombre completo</label>
     <input type="text" id="nombre" placeholder="Tu nombre completo" required />
@@ -127,9 +129,11 @@
 </div>
 
 <script>
+  // Referencias al formulario y al mensaje de estado de registro
   const form = document.getElementById('registroForm');
   const mensaje = document.getElementById('mensajeRegistro');
 
+  // Envía los datos al backend y muestra feedback según resultado
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 

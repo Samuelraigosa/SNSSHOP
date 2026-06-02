@@ -205,6 +205,7 @@
 </head>
 <body>
 
+<!-- Encabezado principal con navegación, búsqueda e iconos rápidos -->
 <header>
   <a href="index.html" class="logo">SN<span>SHOP</span></a>
   <nav>
@@ -234,8 +235,10 @@
 </header>
 
 <main>
+  <!-- Título dinámico que cambia según filtros o búsqueda -->
   <h1 class="page-title" id="page-title">Todos los productos</h1>
 
+  <!-- Filtros de categoría para navegar entre tipos de productos -->
   <div class="filters">
     <button class="filter-group active" data-filter="todos">Todas</button>
     <button class="filter-group" data-filter="tecnologia">Tecnología</button>
@@ -246,6 +249,7 @@
     <button class="filter-group" data-filter="accesorios">Accesorios</button>
   </div>
 
+  <!-- Grid donde se renderizan dinámicamente las tarjetas de productos -->
   <section class="products-grid" id="products-grid"></section>
 
   <div class="no-results" id="no-results" style="display: none;">
@@ -254,6 +258,7 @@
 </main>
 
 <script>
+  // Estado en memoria con los productos obtenidos desde el backend
   let productosDB = [];
 
   const params = new URLSearchParams(window.location.search);
@@ -264,6 +269,7 @@
 
   const titulo = document.getElementById('page-title');
 
+  // Obtiene el catálogo de productos desde la API y dispara el filtrado inicial
   async function cargarProductos() {
     try {
       const url = 'http://localhost:3000/api/productos';
@@ -275,6 +281,7 @@
     }
   }
 
+  // Dibuja en pantalla las tarjetas de productos filtrados
   function renderizarProductos(productos) {
     const grid = document.getElementById('products-grid');
     const noResults = document.getElementById('no-results');
@@ -308,6 +315,7 @@
     });
   }
 
+  // Normaliza texto para comparar categorías sin acentos ni mayúsculas
   function normalizarTexto(texto) {
     return (texto || '')
       .toString()
@@ -317,6 +325,7 @@
       .trim();
   }
 
+  // Aplica filtros por categoría, oferta, novedades o término de búsqueda
   function filtrar() {
     let filtrados = productosDB;
 
@@ -341,6 +350,7 @@
     renderizarProductos(filtrados);
   }
 
+  // Agrega un producto al carrito en localStorage y redirige al carrito
   function agregarAlCarrito(id) {
     const producto = productosDB.find(p => p.id == id);
     if (!producto) return;
@@ -365,6 +375,7 @@
   }
   
 
+  // Inicializa la vista al cargar el documento y configura eventos de filtros
   document.addEventListener('DOMContentLoaded', () => {
     cargarProductos();
 

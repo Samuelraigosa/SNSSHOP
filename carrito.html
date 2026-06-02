@@ -208,6 +208,7 @@
 </head>
 <body>
 
+<!-- Encabezado de navegación principal para moverse entre secciones del sitio -->
 <header>
   <a href="index.html" class="logo">SN<span>SHOP</span></a>
   <nav>
@@ -231,9 +232,11 @@
 </header>
 
 <main>
+  <!-- Título principal de la página de carrito -->
   <h1 class="page-title">🛒 Mi Carrito</h1>
   
   <div class="carrito-container">
+    <!-- Contenedor dinámico donde se renderizan los productos del carrito -->
     <section class="carrito-lista" aria-label="Lista de productos en el carrito"></section>
 
   <div class="carrito-vacio" aria-label="Carrito vacío" style="display:none;">
@@ -241,6 +244,7 @@
       <div id="diag-carrito" style="margin-top:10px;font-size:.95rem;color:#b8b8e6;"></div>
     </div>
 
+    <!-- Resumen de compra con subtotales y acceso al flujo de pago -->
     <aside class="resumen" aria-label="Resumen del pedido" style="display:none;">
       <h3>Resumen del pedido</h3>
       <div class="resumen-row">
@@ -266,6 +270,7 @@
 </main>
 
 <script>
+  // Referencias a elementos del DOM para actualizar la vista del carrito
   const carritoLista = document.querySelector('.carrito-lista');
   const carritoVacioMsg = document.querySelector('.carrito-vacio');
   const resumen = document.querySelector('.resumen');
@@ -280,6 +285,7 @@
   // Depuración, imprime carrito en consola
   console.log("Carrito cargado desde localStorage:", carrito);
 
+  // Renderiza todo el estado visual del carrito en pantalla
   function actualizarVista() {
     carritoLista.innerHTML = '';
 
@@ -331,6 +337,7 @@
     activarEventosCantidad();
   }
 
+  // Asigna eventos a los botones e inputs de cantidad y eliminación
   function activarEventosCantidad() {
     document.querySelectorAll('.btn-decrease').forEach(btn => {
       btn.onclick = () => {
@@ -361,6 +368,7 @@
     });
   }
 
+  // Cambia la cantidad de un producto sumando o restando una unidad
   function cambiarCantidad(id, delta) {
     const prod = carrito.find(p => p.id == id);
     if (!prod) return;
@@ -371,6 +379,7 @@
     guardarYCambiarVista();
   }
 
+  // Establece una cantidad exacta escrita manualmente por el usuario
   function modificarCantidad(id, cantidad) {
     const prod = carrito.find(p => p.id == id);
     if (!prod) return;
@@ -378,6 +387,7 @@
     guardarYCambiarVista();
   }
 
+  // Elimina un producto del carrito, previa confirmación
   function eliminarProducto(id) {
     if (confirm('¿Eliminar este producto del carrito?')) {
       carrito = carrito.filter(p => p.id != id);
@@ -385,11 +395,13 @@
     }
   }
 
+  // Persiste el carrito en localStorage y vuelve a renderizar
   function guardarYCambiarVista() {
     localStorage.setItem('carritoSNShop', JSON.stringify(carrito));
     actualizarVista();
   }
 
+  // API global para agregar productos al carrito desde otras páginas
   window.agregarProductoAlCarrito = function(producto) {
     const existente = carrito.find(p => p.id == producto.id);
     if (existente) {

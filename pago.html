@@ -366,6 +366,7 @@
 </head>
 <body>
 
+<!-- Encabezado global con navegación principal y accesos rápidos -->
 <header>
   <a href="index.html" class="logo">SN<span>SHOP</span></a>
   <nav>
@@ -389,9 +390,12 @@
 </header>
 
 <main>
+  <!-- Título principal del flujo de checkout -->
   <h1 class="page-title">💳 Finalizar Compra</h1>
   
+  <!-- Contenedor del formulario de pago y resumen inicial del carrito -->
   <div class="form-container" id="form-container">
+    <!-- Resumen rápido del pedido antes de confirmar pago -->
     <div class="carrito-resumen">
       <h4>📦 Tu pedido</h4>
       <div class="resumen-items" id="resumen-items"></div>
@@ -402,6 +406,7 @@
     </div>
 
     <div class="form-section">
+      <!-- Sección de datos de envío del cliente -->
       <h3>📍 Datos de envío</h3>
       <form id="form-pago">
         <label for="nombre">Nombre completo
@@ -434,6 +439,7 @@
         </div>
 
         <div class="form-section">
+          <!-- Sección de captura de tarjeta y validaciones básicas -->
           <h3>💳 Método de pago</h3>
           <div class="card-icons">
             <img src="https://cdn-icons-png.flaticon.com/32/196/196562.png" alt="Visa" />
@@ -461,6 +467,7 @@
     </div>
   </div>
 
+  <!-- Vista final mostrada cuando la compra se confirma -->
   <div class="success-message" id="success-message">
     <div class="check-icon">
       <svg viewBox="0 0 24 24">
@@ -490,6 +497,7 @@
 </main>
 
 <script>
+  // Referencias del DOM para manejar checkout y confirmación de compra
   const resumenItems = document.getElementById('resumen-items');
   const resumenTotal = document.getElementById('resumen-total');
   const formContainer = document.getElementById('form-container');
@@ -498,6 +506,7 @@
 
   let carrito = JSON.parse(localStorage.getItem('carritoSNShop')) || [];
 
+  // Carga productos desde localStorage y construye el resumen del pedido
   function cargarResumen() {
     if (carrito.length === 0) {
       window.location.href = 'carrito.html';
@@ -523,6 +532,7 @@
   }
 
   
+  // Formatea número de tarjeta en grupos de 4 dígitos
   document.getElementById('tarjeta').addEventListener('input', function(e) {
     let value = e.target.value.replace(/\s/g, '').replace(/\D/g, '');
     let formatted = '';
@@ -534,6 +544,7 @@
   });
 
   
+  // Formatea fecha de vencimiento con patrón MM/AA
   document.getElementById('vencimiento').addEventListener('input', function(e) {
     let value = e.target.value.replace(/\D/g, '');
     if (value.length >= 2) {
@@ -542,6 +553,7 @@
     e.target.value = value;
   });
 
+  // Procesa la confirmación de pago y genera objeto de pedido
   formPago.addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -569,6 +581,7 @@
   });
 
   
+  // Muestra pantalla de éxito, número de orden y detalle final de compra/envío
   function mostrarResumen(pedido) {
     formContainer.style.display = 'none';
     successMessage.style.display = 'block';

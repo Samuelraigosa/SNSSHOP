@@ -1,4 +1,5 @@
 {
+  "_comment": "Configuración del backend: scripts para ejecutar servidor y dependencias de API/DB.",
   "name": "snshop-backend",
   "version": "1.0.0",
   "description": "Backend de SNShop",

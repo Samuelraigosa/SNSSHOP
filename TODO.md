@@ -1,4 +1,0 @@
-- [x] Revisar scripts de arranque en backend/package.json
-- [ ] Iniciar servidor backend y capturar errores de ejecución
-- [ ] Probar endpoint /api/usuarios/login localmente para confirmar causa
-- [ ] Aplicar corrección mínima necesaria (config DB/arranque/URL) y validar
